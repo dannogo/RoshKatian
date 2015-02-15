@@ -294,10 +294,14 @@ public class MainActivity extends ActionBarActivity implements FragmentB.Communi
                     // Удаляет иконку edit фрагмента С
                     if (isAfterFragmentC && isAfterFragmentC) {
                         View editB = findViewById(R.id.edit_button);
-                        ((ViewGroup)editB.getParent()).removeView(editB);
-                        fragC.editPlaylistButton.setVisibility(View.INVISIBLE);
-                        fragC.editPlaylistButton = null;
-//                        Toast.makeText(getApplicationContext(), "Occured", Toast.LENGTH_SHORT).show();
+                        if (editB != null) {
+                            ((ViewGroup) editB.getParent()).removeView(editB);
+                            fragC.editPlaylistButton.setVisibility(View.INVISIBLE);
+                            fragC.editPlaylistButton = null;
+                        }else{
+
+//                        Toast.makeText(getApplicationContext(), "editButton is null", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     isAfterFragmentC = false;
 //                    if(isFragmentCExists && isAfterFragmentC) {
