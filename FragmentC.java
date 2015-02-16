@@ -189,7 +189,7 @@ public class FragmentC extends Fragment {
                 final CharSequence[] items = {"Delete"};
                 final ArrayList selectedItems = new ArrayList();
 
-
+                Log.i("LOG", mainActivity.stor.toString());
 
                 CheckBox rb = new CheckBox(getActivity());
                 rb.setId(R.id.radio_button);
@@ -213,19 +213,31 @@ public class FragmentC extends Fragment {
 
                                 if (chb.isChecked()) {
                                     // -- DELETING PLAYLIST UNDER --
+                                    mainActivity.stor.removePlaylistData(mainActivity.idOfCurrentActivePlaylist);
+                                    mainActivity.editor.putString("iconPositions", mainActivity.gson.toJson(mainActivity.stor));
+                                    mainActivity.editor.commit();
+                                    Log.i("LOG", mainActivity.stor.toString());
+
                                     mainActivity.dbM.delSelectedPlaylist(mainActivity.IMainUpd, mainActivity.PlHelper, mainActivity.activePlaylist);
                                     mainActivity.isFragmentCExists = false;
 
 //                mainActivity.stor.put(mainActivity.idOfCurrentActivePlaylist, mainActivity.size.x - 270, 0.0f);
 //                mainActivity.stor.putVis(mainActivity.idOfCurrentActivePlaylist,"VISIBLE");
-                                    mainActivity.stor.removePlaylistData(mainActivity.idOfCurrentActivePlaylist);
-                                    mainActivity.editor.putString("iconPositions", mainActivity.gson.toJson(mainActivity.stor));
-                                    mainActivity.editor.commit();
+
+//                                    for (int i = 0; i < 999999; i++) {
+//                                        for (int j = 0; j < 999999; j++) {
+//                                            for (int k = 0; k < 999999; k++) {
+//                                                String[] str = new String[k];
+//                                                for (int l = 0; l<str.length; l++){
+//                                                    str[l] = "string "+l;
+//                                                }
+//                                            }
+//                                        }
+//                                    }
                                     myAdapter.change(2);
                                     viewPager.setCurrentItem(1);
 
 //                mainActivity.removedIcons.add(mainActivity.idOfCurrentActivePlaylist);
-
                                     removeFragment();
 //
 ////                Toast.makeText(getActivity(), "Ха-Ха", Toast.LENGTH_SHORT).show();

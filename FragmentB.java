@@ -64,8 +64,7 @@ public class FragmentB extends Fragment {
     String[] banderol = new String[4];
     View.OnDragListener drop;
     View.OnTouchListener touchFAB;
-//    Display display;
-//    Point size;
+
     ViewPager viewPager;
     ArrayList<String> playlists;
     FragmentC.Communicator comm;
@@ -307,7 +306,6 @@ public class FragmentB extends Fragment {
         iconHide.setOnDragListener(dropToHide);
         relativeLayout.setOnDragListener(dropToReplace);
 
-
         touchFAB = new View.OnTouchListener() {
 
             @Override
@@ -327,7 +325,7 @@ public class FragmentB extends Fragment {
 
                         v.startDrag(null, shadowBuilder, v, 0);
 
-                        Toast.makeText(getActivity(), "id: "+v.getId(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getActivity(), "id: "+v.getId(), Toast.LENGTH_SHORT).show();
 
 //                        v.startDrag(dragData, shadowBuilder, null, 0);
 
@@ -335,10 +333,7 @@ public class FragmentB extends Fragment {
                     }
                     case MotionEvent.ACTION_UP:
                     {
-//                        par.topMargin+=(int)event.getRawY()-prevY;
-//                        par.leftMargin+=(int)event.getRawX()-prevX;
-//                        v.setLayoutParams(par);
-                        Log.i("LOG", "ACTION_UP");
+
                         playlistLaunchBar.setVisibility(View.INVISIBLE);
                         v.setVisibility(View.VISIBLE);
 
@@ -431,7 +426,7 @@ public class FragmentB extends Fragment {
             mainActivity.katians.get(i).setOnDragListener(drop);
             View v = getActivity().findViewById(mainActivity.katians.get(i).getId());
 
-
+            Log.i("LOGb", mainActivity.stor.toString());
             if(mainActivity.stor.containsKey(v.getId())){
                 v.setX(mainActivity.stor.getX(v.getId()));
                 v.setY(mainActivity.stor.getY(v.getId()));

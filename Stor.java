@@ -39,7 +39,7 @@ public class Stor {
         // TODO Auto-generated method stub
         String str = "";
         for(int i=0; i<this.size(); i++){
-            str += ""+xPosition[i];
+            str += ""+xPosition[i]+" - "+yPosition[i];
             str += " | ";
         }
         return str;
