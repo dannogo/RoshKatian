@@ -1,8 +1,10 @@
 package player.com.roshkatian;
 
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -107,6 +109,7 @@ public class MainActivity extends ActionBarActivity implements FragmentB.Communi
     String selectedPlaylist;
     String activePlaylist;
     RotateAnimation rotateAnimation;
+    ArrayList<KatianFloat> katians;
 
 
 
@@ -207,6 +210,8 @@ public class MainActivity extends ActionBarActivity implements FragmentB.Communi
         super.onCreate(savedInstanceState);
 
         Graphics.setGraphics();
+
+        katians= new ArrayList<KatianFloat>();
 
         Display display = getWindowManager().getDefaultDisplay();
         size = new Point();
@@ -310,10 +315,10 @@ public class MainActivity extends ActionBarActivity implements FragmentB.Communi
 //                    }
                     setTitle(selectedGenre);
 //                    fragC.editPlaylistButton.setVisibility(View.INVISIBLE);
-                    for (int i=0; i<fragB.katians.size(); i++){
+                    for (int i=0; i<katians.size(); i++){
                         // Если конкретный плейлист не скрыт насильно - сделать его видимым
-                        if (fragB.katians.get(i).getTag().equals("VISIBLE")){
-                            fragB.katians.get(i).setVisibility(View.VISIBLE);
+                        if (katians.get(i).getTag().equals("VISIBLE")){
+                            katians.get(i).setVisibility(View.VISIBLE);
                         }
 //                        else if (fragB.katians.get(i).getTag().equals("INVISIBLE")){
 //                            fragB.katians.get(i).setVisibility(View.INVISIBLE);
@@ -328,8 +333,8 @@ public class MainActivity extends ActionBarActivity implements FragmentB.Communi
 //                        Toast.makeText(getApplicationContext(), "if сработал", Toast.LENGTH_SHORT).show();
 //                    }
                 }else{
-                    for (int i=0; i<fragB.katians.size(); i++){
-                        fragB.katians.get(i).setVisibility(View.INVISIBLE);
+                    for (int i=0; i<katians.size(); i++){
+                        katians.get(i).setVisibility(View.INVISIBLE);
                     }
                 }
                 if(position == 2){
@@ -370,6 +375,96 @@ public class MainActivity extends ActionBarActivity implements FragmentB.Communi
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+//            final CharSequence[] items = {"huets", "pizdets", "ebets"};
+//
+            ArrayList<String> playlistsForAlertDialog = dbM.getTitlePlaylists();
+            stor = gson.fromJson(mPrefs.getString("iconPositions",""), Stor.class);
+
+            CharSequence[] items = new CharSequence[playlistsForAlertDialog.size()];
+            for (int i=0; i<items.length; i++){
+                items[i] = playlistsForAlertDialog.get(i);
+            }
+
+
+            boolean[] checkedItems = new boolean[playlistsForAlertDialog.size()];
+
+            for (int i=0; i<items.length; i++){
+                if (stor.containsKey(i)){
+//                    Toast.makeText(this, "visibility: "+stor.getVis(i), Toast.LENGTH_SHORT).show();
+                    if (stor.getVis(i) == null || stor.getVis(i).equals("VISIBLE")) {
+                        checkedItems[i] = true;
+                    }else{
+                        checkedItems[i] = false;
+                    }
+                }
+            }
+
+
+//            final CharSequence[] itemsVis = new CharSequence[playlistsForAlertDialog.size()];
+//            for (int i=0; i<items.length; i++){
+//                if (stor.containsKey(i)){
+//                    itemsVis[i] = stor.getVis(i);
+//                }
+//            }
+
+            final ArrayList hideItems = new ArrayList();
+            final ArrayList showItems = new ArrayList();
+
+//            Toast.makeText(this, "Ha-Ha", Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Show/Hide playlist icons")
+                    .setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                            if (isChecked){
+                                showItems.add(which);
+                            } else if (showItems.contains(which)) {
+                                // Else, if the item is already in the array, remove it
+                                showItems.remove(Integer.valueOf(which));
+                            }
+
+                            if (!isChecked) {
+                                // If the user checked the item, add it to the selected items
+                                hideItems.add(which);
+                            } else if (hideItems.contains(which)) {
+                                // Else, if the item is already in the array, remove it
+                                hideItems.remove(Integer.valueOf(which));
+                            }
+                        }
+                    })
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "selectedItems size: "+hideItems.size(), Toast.LENGTH_SHORT).show();
+                            for (int i=0; i<hideItems.size(); i++){
+                                View v = findViewById(katians.get((Integer) hideItems.get(i)).getId());
+                                v.setVisibility(View.INVISIBLE);
+                                v.setTag("INVISIBLE");
+                                stor.putVis((Integer)hideItems.get(i), "INVISIBLE");
+                                editor.putString("iconPositions", gson.toJson(stor));
+                                editor.commit();
+                            }
+                            for (int i=0; i<showItems.size(); i++){
+                                View v = findViewById(katians.get((Integer) showItems.get(i)).getId());
+                                v.setVisibility(View.VISIBLE);
+                                v.setTag("VISIBLE");
+                                stor.putVis((Integer)showItems.get(i), "VISIBLE");
+                                editor.putString("iconPositions", gson.toJson(stor));
+                                editor.commit();
+                            }
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setIcon(R.drawable.visible32)
+                    .show();
+
+
             return true;
         }
 

@@ -193,7 +193,7 @@ public class FragmentC extends Fragment {
 
                 CheckBox rb = new CheckBox(getActivity());
                 rb.setId(R.id.radio_button);
-                rb.setText("delete playlist " + mainActivity.activePlaylist);
+                rb.setText("delete playlist \"" + mainActivity.activePlaylist + "\"");
                 rb.setTextSize(15.0f);
 
                 final LinearLayout ll = new LinearLayout(getActivity());
@@ -203,7 +203,7 @@ public class FragmentC extends Fragment {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-                        builder.setTitle("Edit playlist " + mainActivity.activePlaylist)
+                        builder.setTitle("Edit playlist \"" + mainActivity.activePlaylist+"\"")
                         .setMessage("Input new title: ")
                         .setView(ll)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -211,7 +211,7 @@ public class FragmentC extends Fragment {
                                 EditText edt = (EditText) ll.getChildAt(0);
                                 CheckBox chb = (CheckBox) ll.getChildAt(1);
 
-                                if(chb.isChecked()){
+                                if (chb.isChecked()) {
                                     // -- DELETING PLAYLIST UNDER --
                                     mainActivity.dbM.delSelectedPlaylist(mainActivity.IMainUpd, mainActivity.PlHelper, mainActivity.activePlaylist);
                                     mainActivity.isFragmentCExists = false;
@@ -231,13 +231,15 @@ public class FragmentC extends Fragment {
 ////                Toast.makeText(getActivity(), "Ха-Ха", Toast.LENGTH_SHORT).show();
                                     // -- DELETING PLAYLIST ABOVE --
 
-                                }else{
-                                    String currentDateTime = (String) DateFormat.format("yyyy-MM-dd kk:mm:ss", new Date());
-                                    mainActivity.dbM.updSelectedPlaylist(mainActivity.activePlaylist, ""+edt.getText(), currentDateTime);
+                                } else {
+                                    if (!(edt.getText().toString().equals(""))) {
+                                        String currentDateTime = (String) DateFormat.format("yyyy-MM-dd kk:mm:ss", new Date());
+                                        mainActivity.dbM.updSelectedPlaylist(mainActivity.activePlaylist, "" + edt.getText(), currentDateTime);
 //                                    Toast.makeText(getActivity(), "" + edt.getText(), Toast.LENGTH_SHORT).show();
-                                    mainActivity.activePlaylist = ""+edt.getText();
+                                        mainActivity.activePlaylist = "" + edt.getText();
 //                                    mainActivity.selectedPlaylist = ""+edt.getText();
-                                    getActivity().setTitle(mainActivity.activePlaylist);
+                                        getActivity().setTitle(mainActivity.activePlaylist);
+                                    }
                                 }
                             }
                         })

@@ -56,7 +56,7 @@ public class FragmentB extends Fragment {
     DragSortListView list;
     private ArrayAdapter<String> adapter;
 
-    ArrayList<KatianFloat> katians;
+//    ArrayList<KatianFloat> katians;
     ArrayList<String> songsAuthors;
 
     int playListQuantity = 0;
@@ -198,7 +198,7 @@ public class FragmentB extends Fragment {
         // Related to DragSortList ABOVE
 
 
-        katians= new ArrayList<KatianFloat>();
+//        katians= new ArrayList<KatianFloat>();
 
 //        ArrayList<Integer> katianIcons = new ArrayList<Integer>();
 //
@@ -261,6 +261,7 @@ public class FragmentB extends Fragment {
                 if(event.getAction() == DragEvent.ACTION_DROP){
                     playlistLaunchBar.setVisibility(View.INVISIBLE);
                     view.setTag("INVISIBLE");
+                    view.setVisibility(View.INVISIBLE);
                     mainActivity.stor.putVis(view.getId(), "INVISIBLE");
                     mainActivity.editor.putString("iconPositions", mainActivity.gson.toJson(mainActivity.stor));
                     mainActivity.editor.commit();
@@ -399,11 +400,11 @@ public class FragmentB extends Fragment {
 
     public void updateIcons(int quantity){
 
-        for (int j=0; j<katians.size(); j++){
-            View kat = getActivity().findViewById(katians.get(j).getId());
+        for (int j=0; j<mainActivity.katians.size(); j++){
+            View kat = getActivity().findViewById(mainActivity.katians.get(j).getId());
             ((ViewGroup)kat.getParent()).removeView(kat);
         }
-        katians.clear();
+        mainActivity.katians.clear();
 
         playListQuantity = quantity;
         // Создаю иконки плейлистов
@@ -418,17 +419,17 @@ public class FragmentB extends Fragment {
                 iconsCounter = 0;
             }
 
-            katians.add(new KatianFloat.Builder(getActivity())
+            mainActivity.katians.add(new KatianFloat.Builder(getActivity())
                     .withDrawable(getResources().getDrawable(Graphics.katianIcons.get(iconsCounter)))
                     .withButtonColor(Graphics.katianColors.get(colorsCounter))
                     .withButtonSize(90)
                     .create());
 
-            katians.get(i).setId(i);
-            katians.get(i).setTag("VISIBLE");
-            katians.get(i).setOnTouchListener(touchFAB);
-            katians.get(i).setOnDragListener(drop);
-            View v = getActivity().findViewById(katians.get(i).getId());
+            mainActivity.katians.get(i).setId(i);
+            mainActivity.katians.get(i).setTag("VISIBLE");
+            mainActivity.katians.get(i).setOnTouchListener(touchFAB);
+            mainActivity.katians.get(i).setOnDragListener(drop);
+            View v = getActivity().findViewById(mainActivity.katians.get(i).getId());
 
 
             if(mainActivity.stor.containsKey(v.getId())){
