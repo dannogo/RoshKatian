@@ -203,7 +203,7 @@ public class MainActivity extends ActionBarActivity implements FragmentB.Communi
     String selectedGenre = "String";
     // -------- For parsing ABOVE
 
-
+    ArrayList<Integer> removedIcons = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -413,7 +413,7 @@ public class MainActivity extends ActionBarActivity implements FragmentB.Communi
 
 //            Toast.makeText(this, "Ha-Ha", Toast.LENGTH_SHORT).show();
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Show/Hide playlist icons")
+            builder.setTitle(" Show/Hide playlist icons")
                     .setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -436,7 +436,7 @@ public class MainActivity extends ActionBarActivity implements FragmentB.Communi
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(getApplicationContext(), "selectedItems size: "+hideItems.size(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getApplicationContext(), "selectedItems size: "+hideItems.size(), Toast.LENGTH_SHORT).show();
                             for (int i=0; i<hideItems.size(); i++){
                                 View v = findViewById(katians.get((Integer) hideItems.get(i)).getId());
                                 v.setVisibility(View.INVISIBLE);
@@ -461,7 +461,7 @@ public class MainActivity extends ActionBarActivity implements FragmentB.Communi
                             dialog.dismiss();
                         }
                     })
-                    .setIcon(R.drawable.visible32)
+                    .setIcon(R.drawable.glasses)
                     .show();
 
 

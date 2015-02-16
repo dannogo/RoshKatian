@@ -22,6 +22,7 @@ import android.view.ViewManager;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -258,7 +259,13 @@ public class FragmentB extends Fragment {
                     v.startAnimation(mainActivity.rotateAnimation);
                 }
                 if(event.getAction() == DragEvent.ACTION_DROP){
+//                    Animation slide = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down);
+//                    Animation anim=AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down);
+//                    playlistLaunchBar.startAnimation(anim);
+//                    playlistLaunchBar.startAnimation(slide);
+
                     playlistLaunchBar.setVisibility(View.INVISIBLE);
+
                     view.setTag("INVISIBLE");
                     view.setVisibility(View.INVISIBLE);
                     mainActivity.stor.putVis(view.getId(), "INVISIBLE");
@@ -405,8 +412,14 @@ public class FragmentB extends Fragment {
         // Создаю иконки плейлистов
         int colorsCounter = 0;
         int iconsCounter = 0;
+        if (mainActivity.removedIcons.size() >0) {
+            Toast.makeText(getActivity(), "removed: " + mainActivity.removedIcons, Toast.LENGTH_SHORT).show();
+        }
         for(int i=0; i<playListQuantity; i++){
-
+            if (mainActivity.removedIcons.contains(colorsCounter)){
+                colorsCounter++;
+                iconsCounter++;
+            }
             if (colorsCounter == Graphics.katianColors.size()-1){
                 colorsCounter = 0;
             }

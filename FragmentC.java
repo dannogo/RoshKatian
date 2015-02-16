@@ -216,6 +216,7 @@ public class FragmentC extends Fragment {
                                     mainActivity.stor.removePlaylistData(mainActivity.idOfCurrentActivePlaylist);
                                     mainActivity.editor.putString("iconPositions", mainActivity.gson.toJson(mainActivity.stor));
                                     mainActivity.editor.commit();
+                                    mainActivity.removedIcons.add(mainActivity.idOfCurrentActivePlaylist);
                                     Log.i("LOG", mainActivity.stor.toString());
 
                                     mainActivity.dbM.delSelectedPlaylist(mainActivity.IMainUpd, mainActivity.PlHelper, mainActivity.activePlaylist);
@@ -237,10 +238,9 @@ public class FragmentC extends Fragment {
                                     myAdapter.change(2);
                                     viewPager.setCurrentItem(1);
 
-//                mainActivity.removedIcons.add(mainActivity.idOfCurrentActivePlaylist);
+//                                    Toast.makeText(getActivity(), ""+mainActivity.idOfCurrentActivePlaylist, Toast.LENGTH_SHORT).show();
                                     removeFragment();
 //
-////                Toast.makeText(getActivity(), "Ха-Ха", Toast.LENGTH_SHORT).show();
                                     // -- DELETING PLAYLIST ABOVE --
 
                                 } else {

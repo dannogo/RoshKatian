@@ -54,7 +54,7 @@ public class FragmentA extends Fragment implements  ParseHelper.PARSECONTINUE  {
     public changeFragmentCountCallback myAdapter;
 
     ListView list;
-    String[] descriptions={"Описание 1", "Описание 2", "Описание 3", "Описание 4", "Описание 5", "Описание 6", "Описание 7", "Описание 8", "Описание 9", "Описание 10", "Описание 11", "Описание 12", "Описание 13", "Описание 14", "Описание 15", "Описание 16", "Описание 17"};
+//    String[] descriptions={"Описание 1", "Описание 2", "Описание 3", "Описание 4", "Описание 5", "Описание 6", "Описание 7", "Описание 8", "Описание 9", "Описание 10", "Описание 11", "Описание 12", "Описание 13", "Описание 14", "Описание 15", "Описание 16", "Описание 17"};
 
 
     int[] images = {
@@ -78,11 +78,7 @@ public class FragmentA extends Fragment implements  ParseHelper.PARSECONTINUE  {
             R.drawable.r18,
             R.drawable.r19,
             R.drawable.r20,
-            R.drawable.r21,
-            R.drawable.r22,
-            R.drawable.r23,
-            R.drawable.r24,
-            R.drawable.r25
+            R.drawable.r21
     };
 
     String[] genres;
@@ -136,7 +132,8 @@ public class FragmentA extends Fragment implements  ParseHelper.PARSECONTINUE  {
 //        Привожу ArrayList к Array
         String[] genres = genreName.toArray(new String[genreName.size()]);
 
-        list.setAdapter(new KatianAdapter(getActivity(), genres, images, descriptions));
+//        list.setAdapter(new KatianAdapter(getActivity(), genres, images, descriptions));
+        list.setAdapter(new KatianAdapter(getActivity(), genres, images));
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -190,7 +187,8 @@ public class FragmentA extends Fragment implements  ParseHelper.PARSECONTINUE  {
 //      Привожу ArrayList к Array
         String[] genres = genreName.toArray(new String[genreName.size()]);
 
-        list.setAdapter(new KatianAdapter(getActivity(), genres, images, descriptions));
+//        list.setAdapter(new KatianAdapter(getActivity(), genres, images, descriptions));
+        list.setAdapter(new KatianAdapter(getActivity(), genres, images));
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -286,7 +284,7 @@ class MyViewHolder{
     MyViewHolder(View v) {
         myImage = (ImageView) v.findViewById(R.id.imageView);
         myTitle = (TextView) v.findViewById(R.id.textView);
-        myDescription = (TextView) v.findViewById(R.id.textView2);
+//        myDescription = (TextView) v.findViewById(R.id.textView2);
     }
 }
 
@@ -298,12 +296,14 @@ class KatianAdapter extends ArrayAdapter<String> {
     String[] titleArray;
     String[] descriptionArray;
 
-    KatianAdapter(Context c, String[] titles, int imgs[], String[] desc) {
+//    KatianAdapter(Context c, String[] titles, int imgs[], String[] desc) {
+    KatianAdapter(Context c, String[] titles, int imgs[]) {
         super(c, R.layout.single_row, R.id.textView, titles);
         this.context = c;
         this.images = imgs;
         this.titleArray = titles;
-        this.descriptionArray = desc;
+//        this.descriptionArray = desc;
+
     }
 
 
@@ -325,7 +325,7 @@ class KatianAdapter extends ArrayAdapter<String> {
 
         holder.myImage.setImageResource(images[position]);
         holder.myTitle.setText(titleArray[position]);
-        holder.myDescription.setText(descriptionArray[position]);
+//        holder.myDescription.setText(descriptionArray[position]);
 
         return row;
     }
