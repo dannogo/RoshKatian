@@ -1,10 +1,13 @@
 package player.com.roshkatian;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.Gravity;
@@ -13,14 +16,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by oleh on 1/9/15.
@@ -176,22 +184,73 @@ public class FragmentC extends Fragment {
         editPlaylistButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.dbM.delSelectedPlaylist(mainActivity.IMainUpd, mainActivity.PlHelper, mainActivity.activePlaylist);
-                mainActivity.isFragmentCExists = false;
+
+                final EditText input = new EditText(getActivity());
+                final CharSequence[] items = {"Delete"};
+                final ArrayList selectedItems = new ArrayList();
+
+
+
+                CheckBox rb = new CheckBox(getActivity());
+                rb.setId(R.id.radio_button);
+                rb.setText("delete playlist " + mainActivity.activePlaylist);
+                rb.setTextSize(15.0f);
+
+                final LinearLayout ll = new LinearLayout(getActivity());
+                ll.setOrientation(LinearLayout.VERTICAL);
+                ll.addView(input);
+                ll.addView(rb);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                        builder.setTitle("Edit playlist " + mainActivity.activePlaylist)
+                        .setMessage("Input new title: ")
+                        .setView(ll)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                EditText edt = (EditText) ll.getChildAt(0);
+                                CheckBox chb = (CheckBox) ll.getChildAt(1);
+
+                                if(chb.isChecked()){
+                                    // -- DELETING PLAYLIST UNDER --
+                                    mainActivity.dbM.delSelectedPlaylist(mainActivity.IMainUpd, mainActivity.PlHelper, mainActivity.activePlaylist);
+                                    mainActivity.isFragmentCExists = false;
 
 //                mainActivity.stor.put(mainActivity.idOfCurrentActivePlaylist, mainActivity.size.x - 270, 0.0f);
 //                mainActivity.stor.putVis(mainActivity.idOfCurrentActivePlaylist,"VISIBLE");
-                mainActivity.stor.removePlaylistData(mainActivity.idOfCurrentActivePlaylist);
-                mainActivity.editor.putString("iconPositions", mainActivity.gson.toJson(mainActivity.stor));
-                mainActivity.editor.commit();
-                myAdapter.change(2);
-                viewPager.setCurrentItem(1);
+                                    mainActivity.stor.removePlaylistData(mainActivity.idOfCurrentActivePlaylist);
+                                    mainActivity.editor.putString("iconPositions", mainActivity.gson.toJson(mainActivity.stor));
+                                    mainActivity.editor.commit();
+                                    myAdapter.change(2);
+                                    viewPager.setCurrentItem(1);
 
-//                mainActivity/.removedIcons.add(mainActivity.idOfCurrentActivePlaylist);
+//                mainActivity.removedIcons.add(mainActivity.idOfCurrentActivePlaylist);
 
-                removeFragment();
+                                    removeFragment();
+//
+////                Toast.makeText(getActivity(), "Ха-Ха", Toast.LENGTH_SHORT).show();
+                                    // -- DELETING PLAYLIST ABOVE --
 
-//                Toast.makeText(getActivity(), "Ха-Ха", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    String currentDateTime = (String) DateFormat.format("yyyy-MM-dd kk:mm:ss", new Date());
+                                    mainActivity.dbM.updSelectedPlaylist(mainActivity.activePlaylist, ""+edt.getText(), currentDateTime);
+//                                    Toast.makeText(getActivity(), "" + edt.getText(), Toast.LENGTH_SHORT).show();
+                                    mainActivity.activePlaylist = ""+edt.getText();
+//                                    mainActivity.selectedPlaylist = ""+edt.getText();
+                                    getActivity().setTitle(mainActivity.activePlaylist);
+                                }
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                dialog.dismiss();
+                            }
+                        })
+                        .setIcon(R.drawable.edit32)
+                        .show();
+
+
             }
         });
         mainActivity.isAfterFragmentC = true;
