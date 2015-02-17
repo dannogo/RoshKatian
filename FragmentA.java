@@ -59,11 +59,11 @@ public class FragmentA extends Fragment implements  ParseHelper.PARSECONTINUE  {
 
     int[] images = {
             R.drawable.r1,
-            R.drawable.r2,
+            R.drawable.r18,
+            R.drawable.r15,
             R.drawable.r3,
-            R.drawable.r4,
-            R.drawable.r5,
-            R.drawable.r6,
+            R.drawable.r19,
+            R.drawable.r17,
             R.drawable.r7,
             R.drawable.r8,
             R.drawable.r9,
@@ -72,13 +72,17 @@ public class FragmentA extends Fragment implements  ParseHelper.PARSECONTINUE  {
             R.drawable.r12,
             R.drawable.r13,
             R.drawable.r14,
-            R.drawable.r15,
+            R.drawable.r4,
             R.drawable.r16,
-            R.drawable.r17,
-            R.drawable.r18,
+            R.drawable.r6,
+            R.drawable.r2,
             R.drawable.r19,
-            R.drawable.r20,
-            R.drawable.r21
+            R.drawable.r5,
+            R.drawable.r21,
+            R.drawable.r22,
+            R.drawable.r23,
+            R.drawable.r24,
+            R.drawable.r25
     };
 
     String[] genres;
@@ -179,8 +183,9 @@ public class FragmentA extends Fragment implements  ParseHelper.PARSECONTINUE  {
             genrePath.add(parseHelper.pGenrePathName.get(i).getGenrePath());
             if (parseHelper.pGenrePathName.get(i).getGenreName().equals("Главная страница")) {
                 genreName.add("Новые");
-            }
-            else {
+            }else if(parseHelper.pGenrePathName.get(i).getGenreName().equals("Регги")){
+
+            }else {
                 genreName.add(parseHelper.pGenrePathName.get(i).getGenreName());
             }
         }

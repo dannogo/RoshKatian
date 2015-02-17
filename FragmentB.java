@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -255,15 +256,9 @@ public class FragmentB extends Fragment {
             public boolean onDrag(View v, DragEvent event) {
                 View view = (View) event.getLocalState();
                 if(event.getAction() == DragEvent.ACTION_DRAG_ENTERED){
-
                     v.startAnimation(mainActivity.rotateAnimation);
                 }
                 if(event.getAction() == DragEvent.ACTION_DROP){
-//                    Animation slide = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down);
-//                    Animation anim=AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down);
-//                    playlistLaunchBar.startAnimation(anim);
-//                    playlistLaunchBar.startAnimation(slide);
-
                     playlistLaunchBar.setVisibility(View.INVISIBLE);
 
                     view.setTag("INVISIBLE");

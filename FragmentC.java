@@ -298,6 +298,7 @@ public class FragmentC extends Fragment {
                 if (event.getAction() == DragEvent.ACTION_DROP){
                     view.setVisibility(View.VISIBLE);
                     deleteSongBar.setVisibility(View.INVISIBLE);
+                    editPlaylistButton.setVisibility(View.VISIBLE);
                 }
                 return true;
             }
@@ -323,6 +324,7 @@ public class FragmentC extends Fragment {
                     }
 
                     deleteSongBar.setVisibility(View.INVISIBLE);
+                    editPlaylistButton.setVisibility(View.VISIBLE);
                     view.setVisibility(View.VISIBLE);
                 }
                 if (event.getAction() == DragEvent.ACTION_DRAG_ENDED){
@@ -340,6 +342,7 @@ public class FragmentC extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 deleteSongBar.setVisibility(View.VISIBLE);
+                editPlaylistButton.setVisibility(View.INVISIBLE);
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                 ViewGroup viewGroup = (ViewGroup) view;
                 View linearLayout = ((ViewGroup) view).getChildAt(0);

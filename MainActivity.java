@@ -1,5 +1,6 @@
 package player.com.roshkatian;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
@@ -209,6 +210,21 @@ public class MainActivity extends ActionBarActivity implements FragmentB.Communi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+//        getSupportActionBar().setIcon(R.drawable.ic_launcher);
+
+
+//        setContentView(R.layout.activity_main);
+//        Toast.makeText(this, "Height: "+getSupportActionBar().getHeight(), Toast.LENGTH_SHORT).show();
+
+
+//        setContentView(R.layout.activity_main);
+//        android.support.v7.app.ActionBar actionBar =getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(true);
+
+//        actionBar.setIcon(R.drawable.ic_launcher2);
+
+//        setContentView(R.layout.activity_main);
+//        getSupportActionBar().setLogo(R.drawable.ic_launcher2);
         Graphics.setGraphics();
 
         katians= new ArrayList<KatianFloat>();
@@ -365,7 +381,7 @@ public class MainActivity extends ActionBarActivity implements FragmentB.Communi
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        menu.add(0, 1, 0, "Добавить плейлист");
+        menu.add(0, 1, 0, "Add playlist");
         return true;
     }
 
