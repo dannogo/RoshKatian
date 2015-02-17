@@ -1,6 +1,7 @@
 package player.com.roshkatian.draglist;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,7 @@ public class DragSortItemView extends ViewGroup {
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 
         final View child = getChildAt(0);
+//        child.setVisibility(INVISIBLE);
         if (child == null) {
             setMeasuredDimension(0, width);
             return;

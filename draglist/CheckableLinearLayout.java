@@ -1,6 +1,7 @@
 package player.com.roshkatian.draglist;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.widget.Checkable;
 import android.widget.LinearLayout;
@@ -27,7 +28,13 @@ public class CheckableLinearLayout extends LinearLayout implements Checkable {
 
     @Override
     public void setChecked(boolean checked) {
+        if (checked){
+            setBackgroundColor(Color.parseColor("#BBDEFB"));
+        }else{
+            setBackgroundColor(Color.parseColor("#FFFFFF"));
+        }
         child.setChecked(checked);
+
     }
 
     @Override

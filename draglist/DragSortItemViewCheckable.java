@@ -1,6 +1,7 @@
 package player.com.roshkatian.draglist;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Checkable;
 
@@ -37,6 +38,7 @@ public class DragSortItemViewCheckable extends DragSortItemView implements Check
     @Override
     public void setChecked(boolean checked) {
         View child = getChildAt(0);
+
         if (child instanceof Checkable)
             ((Checkable) child).setChecked(checked);
     }

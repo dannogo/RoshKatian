@@ -1,5 +1,6 @@
 package player.com.roshkatian.draglist;
 
+import android.graphics.Color;
 import android.graphics.Point;
 import android.view.GestureDetector;
 import android.view.HapticFeedbackConstants;
@@ -362,6 +363,7 @@ public class DragSortController extends SimpleFloatViewManager implements View.O
     public boolean onDown(MotionEvent ev) {
         if (mRemoveEnabled && mRemoveMode == CLICK_REMOVE) {
             mClickRemoveHitPos = viewIdHitPosition(ev, mClickRemoveId);
+            setBackgroundColor(Color.parseColor("#BBDEFB"));
         }
 
         mHitPos = startDragPosition(ev);
