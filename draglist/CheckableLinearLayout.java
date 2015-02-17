@@ -29,7 +29,7 @@ public class CheckableLinearLayout extends LinearLayout implements Checkable {
     @Override
     public void setChecked(boolean checked) {
         if (checked){
-            setBackgroundColor(Color.parseColor("#BBDEFB"));
+            setBackgroundColor(Color.parseColor("#E3F2FD"));
         }else{
             setBackgroundColor(Color.parseColor("#FFFFFF"));
         }

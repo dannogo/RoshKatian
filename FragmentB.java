@@ -408,17 +408,33 @@ public class FragmentB extends Fragment {
         int colorsCounter = 0;
         int iconsCounter = 0;
         if (mainActivity.removedIcons.size() >0) {
-            Toast.makeText(getActivity(), "removed: " + mainActivity.removedIcons, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "removed: " + mainActivity.removedIcons, Toast.LENGTH_SHORT).show();
         }
         for(int i=0; i<playListQuantity; i++){
-            if (mainActivity.removedIcons.contains(colorsCounter)){
-                colorsCounter++;
-                iconsCounter++;
+//            if (mainActivity.removedIcons.contains(colorsCounter)){
+//                for (int o=0; o<mainActivity.removedIcons.size(); o++){
+//                    if (mainActivity.removedIcons.get(o) == o) {
+//                        colorsCounter++;
+//                        iconsCounter++;
+//                    }
+//                }
+//            }
+
+            if (mainActivity.removedIcons.contains(i)){
+                for (int o=0; o<mainActivity.removedIcons.size(); o++){
+                    if (mainActivity.removedIcons.get(o) == i) {
+                        colorsCounter++;
+                        iconsCounter++;
+                    }
+                }
             }
-            if (colorsCounter == Graphics.katianColors.size()-1){
+
+
+
+            if (colorsCounter >= Graphics.katianColors.size()-1){
                 colorsCounter = 0;
             }
-            if (iconsCounter == Graphics.katianIcons.size()-1){
+            if (iconsCounter >= Graphics.katianIcons.size()-1){
                 iconsCounter = 0;
             }
 

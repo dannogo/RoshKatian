@@ -253,7 +253,7 @@ public class FragmentA extends Fragment implements  ParseHelper.PARSECONTINUE  {
         if (mainActivity.temporaryStorage.containsKey(mainActivity.selectedGenre)){
 
             isFirstTimeChosen = false;
-            Toast.makeText(getActivity(), "" + mainActivity.temporaryStorage.get(mainActivity.selectedGenre).get(0).size(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "" + mainActivity.temporaryStorage.get(mainActivity.selectedGenre).get(0).size(), Toast.LENGTH_SHORT).show();
 
 
             mainActivity.songsTitle = mainActivity.temporaryStorage.get(mainActivity.selectedGenre).get(0);

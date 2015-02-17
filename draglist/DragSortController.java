@@ -363,7 +363,7 @@ public class DragSortController extends SimpleFloatViewManager implements View.O
     public boolean onDown(MotionEvent ev) {
         if (mRemoveEnabled && mRemoveMode == CLICK_REMOVE) {
             mClickRemoveHitPos = viewIdHitPosition(ev, mClickRemoveId);
-            setBackgroundColor(Color.parseColor("#BBDEFB"));
+            setBackgroundColor(Color.parseColor("#E3F2FD"));
         }
 
         mHitPos = startDragPosition(ev);
