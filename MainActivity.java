@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
+import android.webkit.WebView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -202,6 +203,8 @@ public class MainActivity extends ActionBarActivity implements FragmentB.Communi
     }
 
     String selectedGenre = "String";
+    WebView wv;
+    Player p;
     // -------- For parsing ABOVE
 
     ArrayList<Integer> removedIcons = new ArrayList<Integer>();
@@ -209,6 +212,8 @@ public class MainActivity extends ActionBarActivity implements FragmentB.Communi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        wv = (WebView) findViewById(R.id.webView1);
 
 //        getSupportActionBar().setIcon(R.drawable.ic_launcher);
 

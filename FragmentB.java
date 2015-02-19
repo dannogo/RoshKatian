@@ -25,6 +25,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
@@ -130,15 +132,43 @@ public class FragmentB extends Fragment {
         comm = (FragmentC.Communicator) activity;
     }
 
+    boolean enoughLoading = false;
+    WebView webView;
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         viewPager = (ViewPager) getActivity().findViewById(R.id.pager);
 
-//        Display display = getActivity().getWindowManager().getDefaultDisplay();
-//        size = new Point();
-//        display.getSize(size);
+        webView =(WebView) getActivity().findViewById(R.id.webView1);
+        webView.getSettings().setJavaScriptEnabled(true);
+//        mainActivity.wv.getSettings().setJavaScriptEnabled(true);
+
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onLoadResource(WebView view, String url) {
+                super.onLoadResource(view, url);
+                if (!enoughLoading){
+                    Log.i("LOG", "OnLoad: " + webView.getUrl());
+//                        if (webView.getUrl().contains("http://s1.300kbit.ru")){
+                    if (webView.getUrl().contains("http://s1.300kbit.ru")){
+                        enoughLoading = true;
+
+//                            mainActivity.p = new Player(getActivity(), webView.getUrl());
+                        mainActivity.p = new Player(getActivity(), webView.getUrl());
+                    }
+                }
+
+
+
+            }
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url){
+                view.loadUrl(url);
+                return true;
+            }
+        });
 
         list = (DragSortListView) getActivity().findViewById(R.id.list);
         relativeLayout= (RelativeLayout) getActivity().findViewById(R.id.main_of_fragment_b);
@@ -158,6 +188,21 @@ public class FragmentB extends Fragment {
         adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item_radio, R.id.text, songsAuthors);
 
         list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+
+//                webView = null;
+//                webView =(WebView) getActivity().findViewById(R.id.webView1);
+//                webView.getSettings().setJavaScriptEnabled(true);
+//                mainActivity.p = null;
+                webView.loadUrl(mainActivity.songsLink.get(position));
+
+            }
+        });
 
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
