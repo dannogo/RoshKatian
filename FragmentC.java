@@ -66,25 +66,25 @@ public class FragmentC extends Fragment {
 
                         // Сохранение нового порядка песен в БД
 
-                        int correctAmount = adapter.getCount();
-                        tempStorageForCurrentOrder.clear();
-                        for (int i=0; i<correctAmount; i++){
-                            tempStorageForCurrentOrder.add(adapter.getItem(i));
-                        }
-//                        Toast.makeText(getActivity(), tempStorageForCurrentOrder.get(2),Toast.LENGTH_SHORT).show();
-                        ArrayList<String> tempSongList = mainActivity.dbM.getArtistTitleSong(mainActivity.activePlaylist);
-                        for (int i=0; i< tempSongList.size(); i++){
-                            mainActivity.dbM.delSelectedSong(mainActivity.IMainUpd, mainActivity.PlHelper.SeparateAtristTitle(tempSongList.get(i)), mainActivity.activePlaylist);
-//                            getPlaylistSongs(mainActivity.selectedPlaylist);
-                        }
-
-
-                        for(int i=0; i<tempStorageForCurrentOrder.size(); i++){
-                            mainActivity.dbM.addNewSongToPlaylist(mainActivity.IMainUpd, mainActivity.songInfo,tempStorageForCurrentOrder.get(i),mainActivity.selectedPlaylist);
-
-                        }
-
-                        getPlaylistSongs(mainActivity.activePlaylist);
+//                        int correctAmount = adapter.getCount();
+//                        tempStorageForCurrentOrder.clear();
+//                        for (int i=0; i<correctAmount; i++){
+//                            tempStorageForCurrentOrder.add(adapter.getItem(i));
+//                        }
+////                        Toast.makeText(getActivity(), tempStorageForCurrentOrder.get(2),Toast.LENGTH_SHORT).show();
+//                        ArrayList<String> tempSongList = mainActivity.dbM.getArtistTitleSong(mainActivity.activePlaylist);
+//                        for (int i=0; i< tempSongList.size(); i++){
+//                            mainActivity.dbM.delSelectedSong(mainActivity.IMainUpd, mainActivity.PlHelper.SeparateAtristTitle(tempSongList.get(i)), mainActivity.activePlaylist);
+////                            getPlaylistSongs(mainActivity.selectedPlaylist);
+//                        }
+//
+//
+//                        for(int i=0; i<tempStorageForCurrentOrder.size(); i++){
+//                            mainActivity.dbM.addNewSongToPlaylist(mainActivity.IMainUpd, mainActivity.songInfo,tempStorageForCurrentOrder.get(i),mainActivity.selectedPlaylist);
+//
+//                        }
+//
+//                        getPlaylistSongs(mainActivity.activePlaylist);
 
                         // В случае если при реордеринге песни записались в БД, или записались не все, повторить попытку
 //                        tempList.clear();

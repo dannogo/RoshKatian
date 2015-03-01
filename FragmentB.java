@@ -73,6 +73,14 @@ public class FragmentB extends Fragment {
     ArrayList<String> playlists;
     FragmentC.Communicator comm;
 
+    String[] fakeList = {"http://s1.300kbit.ru/music/Dami%20Im%20-%20Gladiator%20(7th%20Heaven%20Pop%20Dance%20Radio%20Mix).mp3",
+                        "http://s1.300kbit.ru/music/Ola%20-%20This%20Could%20Be%20Paradise.mp3",
+                        "http://s1.300kbit.ru/music/Darude%20Feat.%20Jo%20Angel%20-%20In%20The%20Darkness%20(Affecting%20Noise%20Remix).mp3",
+                        "http://s1.300kbit.ru/music/Robin%20Schulz%20-%20Sun%20Goes%20Down%20%20(ft.%20Jasmine%20Thompson).mp3",
+                        "http://s1.300kbit.ru/music/MaxiGroove%20-%20Come%20On%20(Radio%20Mix).mp3",
+                        "http://s1.300kbit.ru/music/DJ%20Deka%20feat.%20Eniko%20-%20Szabaditsd%20Fel%20(Video%20Mix).mp3"};
+    int cnt = 0;
+
 
 
 //    HashMap<Integer, Float[]> positions = new HashMap<>();
@@ -193,12 +201,68 @@ public class FragmentB extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+//                final WebView wvt = new WebView(getActivity());
+//                wvt.getSettings().setJavaScriptEnabled(true);
+//                wvt.setWebViewClient(new WebViewClient(){
+//                    @Override
+//                    public void onLoadResource(WebView view, String url) {
+//                        super.onLoadResource(view, url);
+//                        if (!enoughLoading){
+//                            Log.i("LOG", "OnLoad: " + wvt.getUrl());
+////                        if (webView.getUrl().contains("http://s1.300kbit.ru")){
+//                            if (wvt.getUrl().contains("http://s1.300kbit.ru")){
+//                                enoughLoading = true;
+//
+//                                mainActivity.p = new Player(getActivity(), wvt.getUrl());
+////                                mainActivity.p = new Player(getActivity(), webView.getUrl());
+//                            }
+//                        }
+//
+//
+//
+//                    }
+//                    @Override
+//                    public boolean shouldOverrideUrlLoading(WebView view, String url){
+//                        view.loadUrl(url);
+//                        return true;
+//                    }
+//                });
 
+
+
+//                mainActivity.p = new Player(getActivity(), fakeList[cnt]);
+//                cnt++;
+
+                enoughLoading = false;
 
 //                webView = null;
 //                webView =(WebView) getActivity().findViewById(R.id.webView1);
 //                webView.getSettings().setJavaScriptEnabled(true);
-//                mainActivity.p = null;
+//                webView.setWebViewClient(new WebViewClient(){
+//                    @Override
+//                    public void onLoadResource(WebView view, String url) {
+//                        super.onLoadResource(view, url);
+//                        if (!enoughLoading){
+//                            Log.i("LOG", "OnLoad: " + webView.getUrl());
+////                        if (webView.getUrl().contains("http://s1.300kbit.ru")){
+//                            if (webView.getUrl().contains("http://s1.300kbit.ru")){
+//                                enoughLoading = true;
+//
+//                            mainActivity.p = new Player(getActivity(), webView.getUrl());
+////                                mainActivity.p = new Player(getActivity(), webView.getUrl());
+//                            }
+//                        }
+//
+//
+//
+//                    }
+//                    @Override
+//                    public boolean shouldOverrideUrlLoading(WebView view, String url){
+//                        view.loadUrl(url);
+//                        return true;
+//                    }
+//                });
+////                mainActivity.p = null;
                 webView.loadUrl(mainActivity.songsLink.get(position));
 
             }
